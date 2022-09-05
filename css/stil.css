@@ -11,7 +11,7 @@ html, body, #map {
     margin-right: 40px;
     width: 70%;
 }
-
+#linkovi li{cursor: pointer;}
 .swal2-html-container img{width: 100%;}
 #sidebar-content{
 padding-left: 0;}
@@ -92,14 +92,17 @@ padding-left: 0;}
 }
 .leaflet-bar .tag-filter-tags-container ul li a{color:black}
 .leaflet-bar .tag-filter-tags-container ul {border: 1px solid #0074d9}
-.span-prirodna_baština{margin-left: 30%;
-  margin-top: 15%;}
-.span-kulturna_baština{margin-left: 25%;
-  margin-top: 20%;}
+
 .span-kulturna_i_prirodna_baština{    margin-left: 30%;
   margin-top: 20%;}
-.span-prirodna_baština::after{content: "○";}
-.span-kulturna_baština::after{content:"◇"}
+.span-muzeji::after{font-family: "FontAwesome";content:"\f19c";position: absolute;
+  left: 10px;
+  top: -5px;
+  font-size: 8px;}
+.span-fakulteti::after{font-family: "FontAwesome";content:"\f19d";position: absolute;
+  left: 10px;
+  top: -5px;
+  font-size: 8px;}
 .span-kulturna_i_prirodna_baština::after{
   background-image: url('../img/kul-pri.png');
     background-size: 10px 10px;
@@ -145,21 +148,11 @@ li.kulturna_i_prirodna_baština::before {
 .filter-info-box{display:none!important}
 .tag-filter-tags-container a{width: 100px!important;
   text-align: left!important;line-height: 2.8!important}
-  .tag-filter-tags-container .header a:first-child{text-align: center!important;padding-top: 15px!important}
-  .tag-filter-tags-container .ripple:last-child a{line-height: 0!important;}
+  .tag-filter-tags-container .header a:first-child{text-align: center!important;}
   
-  .tag-filter-tags-container .ripple:last-child a::before{ content: '  ';   
-    display: inline-block; 
-    height: 10px;   
-    width: 10px;    
-    background-size: 10px;   
-    background-image: url('../img/kul-pri2.png'); 
-    background-repeat: no-repeat;   
-    background-position: center center;
-    vertical-align: middle;
-    padding-top: 22px;}
-  .tag-filter-tags-container .ripple:nth-child(1) a::before{content: "◇ ";}
-  .tag-filter-tags-container .ripple:nth-child(2) a::before{    content: "○ ";}
+  
+  .tag-filter-tags-container .ripple:nth-child(1) a::before{font-family: "FontAwesome"; content:"\f19d  ";}
+  .tag-filter-tags-container .ripple:nth-child(2) a::before{    font-family: "FontAwesome"; content:"\f19c  ";}
 
   .tag-filter-tags-container .header a:first-child::before{display: none;}
 

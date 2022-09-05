@@ -244,7 +244,7 @@ var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     id: panelID,
     tab: "<i class='fa fa-bars active'></i>",
     pane: "<p> <ul id='sidebar-content'></ul></p>",
-    title: "<h2 id='sidebar-title'>Odaberi lokaciju</h2> <ul id='linkovi'></ul>",
+    title: "<h2 id='sidebar-title'>Odaberi baštinu</h2> <ul id='linkovi'></ul>",
   };
   sidebar.addPanel(panelContent);
 
@@ -290,7 +290,7 @@ s.opacity = 1;
 
 var statusFilterButton = L.control
   .tagFilterButton({
-    data: ['kulturna baština', 'prirodna baština', 'kulturna i prirodna baština'],
+    data: ['fakulteti', 'muzeji'],
     filterOnEveryClick: true,
     icon: '<i class="fa fa-filter"></i>',
     clearText:'isključi filtere'
@@ -504,17 +504,15 @@ function funkcija(e){
   }
 
   $( document ).ready(function() {
-    $("#prirodna").change(function() {
+    $("#fakulteti").change(function() {
       $(".easy-button-container").click()
     }) 
       
-      $("#kulturna").change(function() {
-        $("div.kulturna_baština").parent().toggleClass("hidden");
+      $("#muzeji").change(function() {
+        $("div.muzeji").parent().toggleClass("hidden");
       })
       
-      $("#kult-prirod").change(function() {
-        $("div.kulturna_i_prirodna_baština").parent().toggleClass("hidden");
-      })
+      
   
     
   })
