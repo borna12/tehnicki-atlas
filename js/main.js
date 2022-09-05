@@ -244,7 +244,7 @@ var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     id: panelID,
     tab: "<i class='fa fa-bars active'></i>",
     pane: "<p> <ul id='sidebar-content'></ul></p>",
-    title: "<h2 id='sidebar-title'>Odaberi lokaciju</h2>",
+    title: "<h2 id='sidebar-title'>Odaberi lokaciju</h2> <ul id='linkovi'></ul>",
   };
   sidebar.addPanel(panelContent);
 
@@ -261,7 +261,7 @@ sidebar.addPanel({
   id: 'click',
   tab: '<i class="fa fa-info"></i>',
   title: "<h2 id='sidebar-title'>Info</h2>",
-  pane: "<h3>Karta svjetske prirodne i kulturne baštine</h3><p style='padding-right:50px;text-align:justify'>Karta koja prikazuje lokacije svih prirodnih i kulturnih dobra koja su međunarodno priznata te koja su izvanredne i univerzalne vrijednosti koja su kao takva podvrgnuta i posebnomu režimu zaštite i očuvanja. <br><a href='https://enciklopedija.hr/natuknica.aspx?ID=59130'>doznaj više...</a></p><p></p><p>&copy;2022&nbsp;Leksikografski zavod Miroslav Krleža. <br>Sva prava pridržana.</p><p><strong>Urednice<br></strong>Irina Starčević Stančić (voditeljica), Cvijeta Kraus</p><p><strong>Programsko-informatička rje&scaron;enja i upis podataka</strong><br>Josip Mihaljević</p>",
+  pane: "<h3>Atlas hrvatske tehničke baštine</h3><p style='padding-right:50px;text-align:justify'>dodati impressum</p>",
 });
 
 releatedUsageMap.on("click", function () {
@@ -401,7 +401,7 @@ function addPoints(data) {
 
     /*naredba=Swal.fire({title:"<strong>"+data[row].name+"</strong>",html:'<img src="'+data[row].img+'"><p style="text-align:justify">'+data[row].description+'</p><p style="text-align:center;"><a href="'+data[row].link+'" target="_blank">doznaj vi\u0161e</a></p>',showCloseButton:!0})*/
    
-    document.getElementById().innerHTML +=""
+    document.getElementById("linkovi").innerHTML +="<li class='"+data[row].bastina.split(' ').join('_').toLowerCase()+"'><a onclick='funkcija(this)' data-img='"+data[row].img+"' data-opis='"+data[row].description+"' data-link='"+data[row].link+"'>"+data[row].name+"</a></li>"
 
     // UNCOMMENT THIS LINE TO USE POPUPS
     //marker.bindPopup('<h2>' + data[row].name + '</h2>There's a ' + data[row].description + ' here');
@@ -411,7 +411,7 @@ function addPoints(data) {
       properties: {
         name: data[row].name,
         description: data[row].description,
-        img: data[row].img2,
+        img: data[row].img,
         link: data[row].link,
         id: data[row].name,
       },
@@ -425,8 +425,8 @@ function addPoints(data) {
         document.getElementById("sidebar-content").innerHTML =
           e.target.feature.properties.description;
         sidebar.open(panelID);*/
-        if(data[row].img2.length>3){
-        slika='<img src="./img/slika/'+data[row].img2+'"></img>'}
+        if(data[row].img.length>3){
+        slika='<img src="'+data[row].img+'"></img>'}
         else{slika=""}
        if (data[row].link.length>3){
         
@@ -483,7 +483,7 @@ function funkcija(e){
   if (e.getAttribute("data-img").length<3){
     slika=""
   }
-  else{slika='<img src="./img/slika/'+e.getAttribute("data-img")+'">'}
+  else{slika='<img src="'+e.getAttribute("data-img")+'">'}
     if (e.getAttribute("data-link").length>3){
     Swal.fire({
       title: '<strong>'+e.innerHTML+'</strong>',
