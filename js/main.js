@@ -1,14 +1,14 @@
 let geomURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCip2W1fRY266HT33kuiBA3W9FXT7Ar8kb6DJj9Q6eczWEj4Vovqf84u7Wzcnou5XI8chf_O4Bu8ce/pub?output=csv";
 let pointsURL =
-  "test.csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSUT0C9IMfJXNQgLkQbUYqBAvEWFgapxyI4wibkE3b6hz_8T_1R8XR_aFFHvsIieTByAv6dCquZlCOY/pub?output=csv";
 
 window.addEventListener("DOMContentLoaded", init);
 let sidebar;
 let panelID = "my-info-panel";
 let releatedUsageMap ;
 let mcg ;
-zemlja=[]
+
 ////////////////////////////////////////////////
 // Quick and dirty implementation of enableMCG
 ////////////////////////////////////////////////
@@ -400,11 +400,8 @@ function addPoints(data) {
 
 
     /*naredba=Swal.fire({title:"<strong>"+data[row].name+"</strong>",html:'<img src="'+data[row].img+'"><p style="text-align:justify">'+data[row].description+'</p><p style="text-align:center;"><a href="'+data[row].link+'" target="_blank">doznaj vi\u0161e</a></p>',showCloseButton:!0})*/
-    if (!zemlja.includes(data[row].zemlja)){
-    document.getElementById("sidebar-content").innerHTML +="<h3>"+data[row].zemlja+"</h3><ul id='"+data[row].zemlja.split(' ').join('_').toLowerCase()+"'></ul>"
-    zemlja.push(data[row].zemlja) 
-  }
-    document.getElementById(data[row].zemlja.split(' ').join('_').toLowerCase()).innerHTML +="<li class='"+data[row].bastina.split(' ').join('_').toLowerCase()+"'><a onclick='funkcija(this)' data-img='"+data[row].img2+"' data-opis='"+data[row].description+"' data-link='"+data[row].link+"'>"+data[row].name+"</a></li>"
+   
+    document.getElementById().innerHTML +=""
 
     // UNCOMMENT THIS LINE TO USE POPUPS
     //marker.bindPopup('<h2>' + data[row].name + '</h2>There's a ' + data[row].description + ' here');
@@ -462,7 +459,7 @@ function addPoints(data) {
       labelAnchor: [-6, 0],
       popupAnchor: [0, -15],
       iconSize: [25, 41],
-      html: '<div class="pin tooltip '+data[row].bastina.split(' ').join('_')+" "+data[row].name.split(' ').join('_')+" "+data[row].zemlja.split(' ').join('_')+'"><span class="span-'+data[row].bastina.split(' ').join('_')+'"></span><span class="tooltiptext">'+data[row].name+'</span></div>'
+      html: '<div class="pin tooltip '+data[row].bastina.split(' ').join('_')+" "+data[row].name.split(' ').join('_')+'"><span class="span-'+data[row].bastina.split(' ').join('_')+'"></span><span class="tooltiptext">'+data[row].name+'</span></div>'
       
     });
     
