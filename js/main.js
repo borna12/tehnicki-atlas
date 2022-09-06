@@ -219,12 +219,12 @@ var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
 
 // initialize the map on the "map" div with a given center and zoom
- releatedUsageMap = L.map('releated-usage-map',{minZoom: 3})
-    .setView([20, 0], 3)
+ releatedUsageMap = L.map('releated-usage-map',{minZoom: 7})
+    .setView([20, 0], 7)
   .addLayer(osm);
 
-  var southWest = L.latLng(-90, -190),
-  northEast = L.latLng(90, 190);
+  var southWest = L.latLng(42.17, 13.15),
+  northEast = L.latLng(46.64, 19.25);
   var bounds = L.latLngBounds(southWest, northEast);
   
   releatedUsageMap.setMaxBounds(bounds);
