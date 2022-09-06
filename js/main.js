@@ -223,7 +223,7 @@ var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     .setView([20, 0], 7)
   .addLayer(osm);
 
-  var southWest = L.latLng(42.17, 13.15),
+  var southWest = L.latLng(42.17, 13.1459),
   northEast = L.latLng(46.64, 19.25);
   var bounds = L.latLngBounds(southWest, northEast);
   
