@@ -219,8 +219,8 @@ var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
 
 // initialize the map on the "map" div with a given center and zoom
- releatedUsageMap = L.map('releated-usage-map',{minZoom: 7})
-    .setView([20, 0], 7)
+ releatedUsageMap = L.map('releated-usage-map',{minZoom: 8})
+    .setView([50, 0], 8)
   .addLayer(osm);
 
   var southWest = L.latLng(42.17, 13.1459),
@@ -290,7 +290,7 @@ s.opacity = 1;
 
 var statusFilterButton = L.control
   .tagFilterButton({
-    data: ['fakulteti', 'muzeji'],
+    data: ['fakulteti', 'muzeji', 'instituti'],
     filterOnEveryClick: true,
     icon: '<i class="fa fa-filter"></i>',
     clearText:'isključi filtere'
@@ -510,6 +510,10 @@ function funkcija(e){
       
       $("#muzeji").change(function() {
         $("div.muzeji").parent().toggleClass("hidden");
+      })
+
+      $("#instituti").change(function() {
+        $("div.instituti").parent().toggleClass("hidden");
       })
       
       

@@ -103,13 +103,12 @@ padding-left: 0;}
   left: 10px;
   top: -5px;
   font-size: 8px;}
-.span-kulturna_i_prirodna_baština::after{
-  background-image: url('../img/kul-pri.png');
-    background-size: 10px 10px;
-    display: inline-block;
-    width: 10px; 
-    height: 10px;
-    content:"";}
+
+  .span-instituti::after{font-family: "FontAwesome";content:"\f02d";position: absolute;
+    left: 10px;
+    top: -5px;
+    font-size: 8px;}
+
 
 li.kulturna_baština{
   list-style-type: "◇ ";
@@ -153,6 +152,7 @@ li.kulturna_i_prirodna_baština::before {
   
   .tag-filter-tags-container .ripple:nth-child(1) a::before{font-family: "FontAwesome"; content:"\f19d  ";}
   .tag-filter-tags-container .ripple:nth-child(2) a::before{    font-family: "FontAwesome"; content:"\f19c  ";}
+  .tag-filter-tags-container .ripple:nth-child(3) a::before{    font-family: "FontAwesome"; content:"\f02d  ";}
 
   .tag-filter-tags-container .header a:first-child::before{display: none;}
 
