@@ -219,7 +219,12 @@ var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
 
 // initialize the map on the "map" div with a given center and zoom
- releatedUsageMap = L.map('releated-usage-map',{minZoom: 8})
+ releatedUsageMap = L.map('releated-usage-map',{minZoom: 8,
+  fullscreenControl: true,
+  // OR
+  fullscreenControl: {
+      pseudoFullscreen: false // if true, fullscreen to page width and height
+  }})
     .setView([50, 0], 8)
   .addLayer(osm);
 
@@ -267,7 +272,6 @@ sidebar.addPanel({
 releatedUsageMap.on("click", function () {
     sidebar.close(panelID);
   });
-
   // Use PapaParse to load data from Google Sheets
   // And call the respective functions to add those to the map.
   Papa.parse(geomURL, {
