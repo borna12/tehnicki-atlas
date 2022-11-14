@@ -223,7 +223,11 @@ var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   fullscreenControl: true,
   // OR
   fullscreenControl: {
-      pseudoFullscreen: false // if true, fullscreen to page width and height
+      pseudoFullscreen: false,
+      title: {
+        'false': 'prikaz preko punog zaslona',
+        'true': 'izlaz preko punog zaslona'
+    } // if true, fullscreen to page width and height
   }})
     .setView([50, 0], 8)
   .addLayer(osm);
@@ -405,7 +409,7 @@ function addPoints(data) {
 
     /*naredba=Swal.fire({title:"<strong>"+data[row].name+"</strong>",html:'<img src="'+data[row].img+'"><p style="text-align:justify">'+data[row].description+'</p><p style="text-align:center;"><a href="'+data[row].link+'" target="_blank">doznaj vi\u0161e</a></p>',showCloseButton:!0})*/
    
-    document.getElementById("linkovi").innerHTML +="<li class='"+data[row].bastina.split(' ').join('_').toLowerCase()+"'><a onclick='funkcija(this)' data-img='"+data[row].img+"' data-opis='"+data[row].description+"' data-link='"+data[row].link+"'>"+data[row].name+"</a></li>"
+    document.getElementById("linkovi").innerHTML +="<li class='"+data[row].bastina.split(' ').join('_').toLowerCase()+"'><a onclick='funkcija(this)' data-img='"+data[row].img+"' data-opis='"+data[row].description+"' data-link='"+data[row].link+"' data-lat='"+data[row].lat+"' data-lon='"+data[row].lon+"'>"+data[row].name+"</a></li>"
 
     // UNCOMMENT THIS LINE TO USE POPUPS
     //marker.bindPopup('<h2>' + data[row].name + '</h2>There's a ' + data[row].description + ' here');
@@ -481,9 +485,8 @@ function addPoints(data) {
 
   }
 }
-
 function funkcija(e){
-  
+  releatedUsageMap.setView([e.getAttribute("data-lat"), e.getAttribute("data-lon")], 15);
   if (e.getAttribute("data-img").length<3){
     slika=""
   }
@@ -523,4 +526,7 @@ function funkcija(e){
       
   
     
-  })
+  }  
+  )
+  
+
