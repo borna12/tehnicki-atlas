@@ -444,7 +444,7 @@ function addPoints(data) {
           slika+'<p style="text-align:justify">'+data[row].description+'</p><p style="text-align:center;"><a href="'+data[row].link+'" target="_blank">doznaj više</a></p>',
           showCloseButton: true,
           confirmButtonText: "zatvori",
-          confirmButtonColor: "#0074d9"
+          confirmButtonColor: "#0074d9", target: document.getElementById("releated-usage-map"),
         })}
         else{
           Swal.fire({
@@ -453,7 +453,7 @@ function addPoints(data) {
             slika+'<p style="text-align:justify">'+data[row].description+'</p><p style="text-align:center;"></p>',
             showCloseButton: true,
             confirmButtonText: "zatvori",
-            confirmButtonColor: "#0074d9"
+            confirmButtonColor: "#0074d9", target: document.getElementById("releated-usage-map"),
           })
         }     
       },
@@ -498,7 +498,7 @@ function funkcija(e){
       slika+'<p style="text-align:justify">'+e.getAttribute("data-opis")+'</p><p style="text-align:center;"></p><a href="'+e.getAttribute("data-link")+'" target="_blank">doznaj više</a>',
       showCloseButton: true,
       confirmButtonText: "zatvori",
-      confirmButtonColor: "#0074d9"
+      confirmButtonColor: "#0074d9", target: document.getElementById("releated-usage-map"),
     })}
   else{Swal.fire({
     title: '<strong>'+e.innerHTML+'</strong>',
@@ -506,7 +506,7 @@ function funkcija(e){
     slika+'<p style="text-align:justify">'+e.getAttribute("data-opis")+'</p><p style="text-align:center;"></p>',
     showCloseButton: true,
     confirmButtonText: "zatvori",
-    confirmButtonColor: "#0074d9"
+    confirmButtonColor: "#0074d9", target: document.getElementById("releated-usage-map"),
   })}
   }
 
