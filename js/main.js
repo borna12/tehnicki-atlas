@@ -1,4 +1,3 @@
-
 let pointsURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSUT0C9IMfJXNQgLkQbUYqBAvEWFgapxyI4wibkE3b6hz_8T_1R8XR_aFFHvsIieTByAv6dCquZlCOY/pub?output=csv";
 
@@ -293,10 +292,6 @@ s.opacity = 1;
 
  mcg = L.markerClusterGroup().addTo(releatedUsageMap);
 
-
-
-
-
 /*var foodFilterButton = L.control
   .tagFilterButton({
     data: ['tomato', 'cherry', 'strawberry'],
@@ -307,8 +302,6 @@ s.opacity = 1;
 
 foodFilterButton.addToReleated(statusFilterButton);*/
 }
-
-
 function addPoints(data) {
   data = data.data;
   // Choose marker type. Options are:
