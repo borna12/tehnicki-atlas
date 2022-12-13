@@ -1,5 +1,4 @@
-let geomURL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRCip2W1fRY266HT33kuiBA3W9FXT7Ar8kb6DJj9Q6eczWEj4Vovqf84u7Wzcnou5XI8chf_O4Bu8ce/pub?output=csv";
+
 let pointsURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSUT0C9IMfJXNQgLkQbUYqBAvEWFgapxyI4wibkE3b6hz_8T_1R8XR_aFFHvsIieTByAv6dCquZlCOY/pub?output=csv";
 
@@ -8,6 +7,10 @@ let sidebar;
 let panelID = "my-info-panel";
 let releatedUsageMap ;
 let mcg ;
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
 
 ////////////////////////////////////////////////
 // Quick and dirty implementation of enableMCG
@@ -253,7 +256,7 @@ var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     id: panelID,
     tab: "<i class='fa fa-bars active'></i>",
     pane: "<p> <ul id='sidebar-content'></ul></p>",
-    title: "<h2 id='sidebar-title'>Odaberi baštinu</h2> <ul id='linkovi'></ul>",
+    title: "<h2 id='sidebar-title'>Odaberi baštinu</h2> <button class='accordion'>Fakulteti</button><div class='panel'><ul id='linkovi-fakulteti'></ul></div><button class='accordion'>Muzeji</button><div class='panel'><ul id='linkovi-muzeji'></ul></div><button class='accordion'>Instituti</button><div class='panel'><ul id='linkovi-instituti'></ul></div>",
   };
   sidebar.addPanel(panelContent);
 
@@ -274,15 +277,11 @@ sidebar.addPanel({
 });
 
 releatedUsageMap.on("click", function () {
-    sidebar.close(panelID);
+    //sidebar.close(panelID);
   });
   // Use PapaParse to load data from Google Sheets
   // And call the respective functions to add those to the map.
-  Papa.parse(geomURL, {
-    download: true,
-    header: true,
-    complete: addGeoms,
-  });
+
   Papa.parse(pointsURL, {
     download: true,
     header: true,
@@ -296,17 +295,7 @@ s.opacity = 1;
 
 
 
-var statusFilterButton = L.control
-  .tagFilterButton({
-    data: ['fakulteti', 'muzeji', 'instituti'],
-    filterOnEveryClick: true,
-    icon: '<i class="fa fa-filter"></i>',
-    clearText:'isključi filtere'
-  })
-  .addTo(releatedUsageMap);
 
-// Enable MCG integration
-statusFilterButton.enableMCG(mcg);
 
 /*var foodFilterButton = L.control
   .tagFilterButton({
@@ -318,80 +307,23 @@ statusFilterButton.enableMCG(mcg);
 
 foodFilterButton.addToReleated(statusFilterButton);*/
 }
-function addGeoms(data) {
-  data = data.data;
-  // Need to convert the PapaParse JSON into a GeoJSON
-  // Start with an empty GeoJSON of type FeatureCollection
-  // All the rows will be inserted into a single GeoJSON
-  let fc = {
-    type: "FeatureCollection",
-    features: [],
-  };
 
-  for (let row in data) {
-    // The Sheets data has a column 'include' that specifies if that row should be mapped
-    if (data[row].include == "y") {
-      let features = parseGeom(JSON.parse(data[row].geometry));
-      features.forEach((el) => {
-        el.properties = {
-          name: data[row].name,
-          description: data[row].description,
-        };
-        fc.features.push(el);
-      });
-    }
-  }
-
-  // The geometries are styled slightly differently on mouse hovers
-  let geomStyle = { color: "#2ca25f", fillColor: "#99d8c9", weight: 2 };
-  let geomHoverStyle = { color: "green", fillColor: "#2ca25f", weight: 3 };
-
-  L.geoJSON(fc, {
-    onEachFeature: function (feature, layer) {
-      layer.on({
-        mouseout: function (e) {
-          e.target.setStyle(geomStyle);
-        },
-        mouseover: function (e) {
-          e.target.setStyle(geomHoverStyle);
-        },
-        click: function (e) {
-          // This zooms the map to the clicked geometry
-          // Uncomment to enable
-          // map.fitBounds(e.target.getBounds());
-
-          // if this isn't added, then map.click is also fired!
-         /* L.DomEvent.stopPropagation(e);
-
-          document.getElementById("sidebar-title").innerHTML =
-            e.target.feature.properties.name;
-          document.getElementById("sidebar-content").innerHTML =
-            e.target.feature.properties.description;
-          sidebar.open(panelID);*/
-          //alert(e.target.feature.properties.name)
-        },
-      });
-    },
-    style: geomStyle,
-  }).addTo(releatedUsageMap);
-}
 
 function addPoints(data) {
   data = data.data;
-
   // Choose marker type. Options are:
   // (these are case-sensitive, defaults to marker!)
   // marker: standard point with an icon
   // circleMarker: a circle with a radius set in pixels
   // circle: a circle with a radius set in meters
   let markerType = "marker";
-
   // Marker radius
   // Wil be in pixels for circleMarker, metres for circle
   // Ignore for point
   let markerRadius = 100;
-
+  kategorije=[]
   for (let row = 0; row < data.length; row++) {
+    kategorije.push(data[row].bastina);
     let marker;
     if (markerType == "circleMarker") {
       marker = L.circleMarker([data[row].lat, data[row].lon], {
@@ -408,8 +340,12 @@ function addPoints(data) {
 
 
     /*naredba=Swal.fire({title:"<strong>"+data[row].name+"</strong>",html:'<img src="'+data[row].img+'"><p style="text-align:justify">'+data[row].description+'</p><p style="text-align:center;"><a href="'+data[row].link+'" target="_blank">doznaj vi\u0161e</a></p>',showCloseButton:!0})*/
-   
-    document.getElementById("linkovi").innerHTML +="<li class='"+data[row].bastina.split(' ').join('_').toLowerCase()+"'><a onclick='funkcija(this)' data-img='"+data[row].img+"' data-opis='"+data[row].description+"' data-link='"+data[row].link+"' data-lat='"+data[row].lat+"' data-lon='"+data[row].lon+"'>"+data[row].name+"</a></li>"
+  if(data[row].bastina=="muzeji"){
+    document.getElementById("linkovi-muzeji").innerHTML +="<li class='"+data[row].bastina.split(' ').join('_').toLowerCase()+"'><a onclick='funkcija(this)' data-bastina='"+data[row].bastina.split(' ').join('_').toLowerCase()+"' data-img='"+data[row].img+"' data-opis='"+data[row].description+"' data-link='"+data[row].link+"' data-lat='"+data[row].lat+"' data-lon='"+data[row].lon+"'>"+data[row].name+"</a></li>"}
+  else if(data[row].bastina=="fakulteti"){
+      document.getElementById("linkovi-fakulteti").innerHTML +="<li class='"+data[row].bastina.split(' ').join('_').toLowerCase()+"'><a onclick='funkcija(this)' data-bastina='"+data[row].bastina.split(' ').join('_').toLowerCase()+"' data-img='"+data[row].img+"' data-opis='"+data[row].description+"' data-link='"+data[row].link+"' data-lat='"+data[row].lat+"' data-lon='"+data[row].lon+"'>"+data[row].name+"</a></li>"}
+  else if(data[row].bastina=="instituti"){
+        document.getElementById("linkovi-instituti").innerHTML +="<li class='"+data[row].bastina.split(' ').join('_').toLowerCase()+"'><a onclick='funkcija(this)' data-bastina='"+data[row].bastina.split(' ').join('_').toLowerCase()+"' data-img='"+data[row].img+"' data-opis='"+data[row].description+"' data-link='"+data[row].link+"' data-lat='"+data[row].lat+"' data-lon='"+data[row].lon+"'>"+data[row].name+"</a></li>"}
 
     // UNCOMMENT THIS LINE TO USE POPUPS
     //marker.bindPopup('<h2>' + data[row].name + '</h2>There's a ' + data[row].description + ' here');
@@ -424,6 +360,7 @@ function addPoints(data) {
         id: data[row].name,
       },
     };
+
     marker.on({
       click: function (e) {
         releatedUsageMap.setView(e.latlng);
@@ -437,7 +374,6 @@ function addPoints(data) {
         slika='<img src="'+data[row].img+'"></img>'}
         else{slika=""}
        if (data[row].link.length>3){
-        
         Swal.fire({
           title: '<strong>'+data[row].name+'</strong>',
           html:
@@ -456,7 +392,7 @@ function addPoints(data) {
             confirmButtonColor: "#0074d9", target: document.getElementById("releated-usage-map"),
           })
         }     
-      },
+      }
     });
     // COMMENT UNTIL HERE TO DISABLE SIDEBAR FOR THE MARKERS
 
@@ -484,6 +420,39 @@ function addPoints(data) {
     marker.addTo(mcg);
 
   }
+
+  uniqueArray = kategorije.filter(function(item, pos, self) {
+    return self.indexOf(item) == pos;
+})
+var statusFilterButton = L.control.tagFilterButton({
+  data: uniqueArray,
+  filterOnEveryClick: true,
+  icon: '<i class="fa fa-filter"></i>',
+  clearText:'isključi filtere'
+})
+.addTo(releatedUsageMap);
+
+// Enable MCG integration
+statusFilterButton.enableMCG(mcg);
+
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active2");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+if(window.location.hash) {
+  kordinate=window.location.hash.replace("#","").split(",")
+  releatedUsageMap.setView(kordinate, 15);}
 }
 function funkcija(e){
   releatedUsageMap.setView([e.getAttribute("data-lat"), e.getAttribute("data-lon")], 15);
@@ -508,25 +477,23 @@ function funkcija(e){
     confirmButtonText: "zatvori",
     confirmButtonColor: "#0074d9", target: document.getElementById("releated-usage-map"),
   })}
+
+  $(".easy-button-button").click();
+  $(".tag-filter-tags-container").find('li').each(function() {
+    if($(this).attr("data-value")==e.getAttribute("data-bastina")){$(this).click()}
+  })
   }
 
   $( document ).ready(function() {
     $("#fakulteti").change(function() {
       $(".easy-button-container").click()
     }) 
-      
       $("#muzeji").change(function() {
         $("div.muzeji").parent().toggleClass("hidden");
       })
-
       $("#instituti").change(function() {
         $("div.instituti").parent().toggleClass("hidden");
-      })
-      
-      
-  
-    
+      }) 
   }  
-  )
-  
+)
 
