@@ -6,13 +6,14 @@ html, body, #map {
     height: 100%;
     width: 100%;
 }
+
 #sidebar-content, #sidebar-title {
     word-break: break-word;
     margin-right: 40px;
     width: 70%;
 }
 [id^=linkovi] li{cursor: pointer;}
-.swal2-html-container img{width: 100%;}
+.swal2-html-container img{width: 60%;}
 #sidebar-content{
 padding-left: 0;}
 .awesome-marker {filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));}
@@ -90,7 +91,7 @@ padding-left: 0;}
   background-color: #FFF;
   background-position: center;
 }
-.leaflet-bar .tag-filter-tags-container ul li a{color:black}
+.leaflet-bar .tag-filter-tags-container ul li a{color:black; padding-left: 5px;}
 .leaflet-bar .tag-filter-tags-container ul {border: 1px solid #0074d9}
 
 .span-kulturna_i_prirodna_baština{    margin-left: 30%;
@@ -99,15 +100,19 @@ padding-left: 0;}
   left: 10px;
   top: -5px;
   font-size: 8px;}
-.span-fakulteti::after{font-family: "FontAwesome";content:"\f19d";position: absolute;
+.span-objekti::after{font-family: "FontAwesome";content:"\f013";position: absolute;
   left: 10px;
   top: -5px;
   font-size: 8px;}
 
-  .span-instituti::after{font-family: "FontAwesome";content:"\f02d";position: absolute;
+  .span-ustanove::after{font-family: "FontAwesome";content:"\f02d";position: absolute;
     left: 10px;
     top: -5px;
     font-size: 8px;}
+.span-poduzeća::after{font-family: "FontAwesome";content:"\f0f2";position: absolute;
+      left: 10px;
+      top: -5px;
+      font-size: 8px;}
 
 
 li.kulturna_baština{
@@ -148,12 +153,10 @@ li.kulturna_i_prirodna_baština::before {
 .tag-filter-tags-container a{width: 100px!important;
   text-align: left!important;line-height: 2.8!important}
   .tag-filter-tags-container .header a:first-child{text-align: center!important;}
-  
-  
-  .tag-filter-tags-container .ripple:nth-child(1) a::before{font-family: "FontAwesome"; content:"\f19d  ";}
-  .tag-filter-tags-container .ripple:nth-child(2) a::before{    font-family: "FontAwesome"; content:"\f19c  ";}
-  .tag-filter-tags-container .ripple:nth-child(3) a::before{    font-family: "FontAwesome"; content:"\f02d  ";}
-
+  .tag-filter-tags-container .ripple:nth-child(1) a::before{font-family: "FontAwesome"; content:"\f19c  ";}
+  .tag-filter-tags-container .ripple:nth-child(5) a::before{    font-family: "FontAwesome"; content:"\f013  ";}
+  .tag-filter-tags-container .ripple:nth-child(6) a::before{    font-family: "FontAwesome"; content:"\f0f2  ";}
+  .tag-filter-tags-container .ripple:nth-child(7) a::before{    font-family: "FontAwesome"; content:"\f02d  ";}
   .tag-filter-tags-container .header a:first-child::before{display: none;}
 
 
@@ -194,3 +197,7 @@ li.kulturna_i_prirodna_baština::before {
     overflow: hidden;
     transition: max-height 0.2s ease-out;
   }
+
+span.checkbox{position: absolute;
+  right: 0;
+  top: 20%;margin-right: 10px;}
