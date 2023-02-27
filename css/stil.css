@@ -145,6 +145,10 @@ li.kulturna_i_prirodna_baština::before {
   left: 47px;
   padding-top: 10px;
 }
+.muzej-ikona::before{font-family: "FontAwesome"; content:"\f19c  "}
+.objekt-ikona::before{font-family: "FontAwesome"; content:"\f013  "}
+.poduzeca-ikona::before{font-family: "FontAwesome"; content:"\f0f2  "}
+.ustanove-ikona::before{font-family: "FontAwesome"; content:"\f02d  "}
 
 .leaflet-right {
   right: 0px!important;
@@ -153,10 +157,11 @@ li.kulturna_i_prirodna_baština::before {
 .tag-filter-tags-container a{width: 100px!important;
   text-align: left!important;line-height: 2.8!important}
   .tag-filter-tags-container .header a:first-child{text-align: center!important;}
+  /*
   .tag-filter-tags-container .ripple:nth-child(1) a::before{font-family: "FontAwesome"; content:"\f19c  ";}
   .tag-filter-tags-container .ripple:nth-child(5) a::before{    font-family: "FontAwesome"; content:"\f013  ";}
-  .tag-filter-tags-container .ripple:nth-child(6) a::before{    font-family: "FontAwesome"; content:"\f0f2  ";}
-  .tag-filter-tags-container .ripple:nth-child(7) a::before{    font-family: "FontAwesome"; content:"\f02d  ";}
+  .tag-filter-tags-container .ripple:nth-child(7) a::before{    font-family: "FontAwesome"; content:"\f0f2  ";}
+  .tag-filter-tags-container .ripple:nth-child(8) a::before{    font-family: "FontAwesome"; content:"\f02d  ";}*/
   .tag-filter-tags-container .header a:first-child::before{display: none;}
 
 
