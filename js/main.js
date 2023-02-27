@@ -548,6 +548,7 @@ function funkcija(e) {
     if (String($(this).text().toLowerCase() == "prikaži sve" )) {
       $(this).click() }
   })
+  $(".swal2-html-container").click()
 }
 
 $(document).ready(function () {
