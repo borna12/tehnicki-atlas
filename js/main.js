@@ -549,6 +549,8 @@ function funkcija(e) {
       $(this).click() }
   })
   $(".swal2-html-container").click()
+
+  
 }
 
 $(document).ready(function () {
@@ -568,3 +570,6 @@ $(document).ready(function () {
 
 })
 
+$( window ).on( "scroll", function(e) {
+  e.preventDefault();
+});
