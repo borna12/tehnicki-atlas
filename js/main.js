@@ -206,7 +206,7 @@ function init() {
   // Adapted from TagFilterButton demo
   // https://github.com/maydemirx/leaflet-tag-filter-button/blob/0.0.4/docs/assets/js/main.js
   ////////////////////////////////////////////////
-  var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  var osmUrl = 'https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key=bAORSPxBPfSEAdo1hN6H',
 
     osm = L.tileLayer(osmUrl, {
       maxZoom: 19,
